@@ -1,0 +1,45 @@
+[options]
+
+font = Input 12
+
+[colors]
+
+# special
+foreground      = #ffffff
+foreground_bold = #ffffff
+cursor          = #ffffff
+background      = rgba(0, 3, 16, 0.9)
+scrollback_lines= -1
+
+# black
+color0  = #1b1d1e
+color8  = #505354
+
+# red
+color1  = #f92672
+color9  = #ff5995
+
+# green
+color2  = #82b414
+color10 = #b6e354
+
+# yellow
+color3  = #fd971f
+color11 = #feed6c
+
+# blue
+color4  = #4e82aa
+color12 = #0c73c2
+
+# magenta
+color5  = #8c54fe
+color13 = #9e6ffe
+
+# cyan
+color6  = #465457
+color14 = #899ca1
+
+# white
+color7  = #ccccc6
+color15 = #f8f8f2
+

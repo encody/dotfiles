@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+spotify &
+xdotool search --sync --onlyvisible --class "Spotify" set_desktop_for_window 3
+

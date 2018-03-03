@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+timeout=3
+
+function fix_amps {
+    first=$1
+    amp="&amp;"
+    echo ${first//&/"$amp"}
+}
+
+while true; do
+    if [[ $(playerctl -l 2>/dev/null | wc -l) -gt 0 ]]; then
+        s=$(playerctl status)
+
+        if [[ "$s" = "Playing" || "$s" = "Paused" ]]; then
+            title=$(playerctl metadata 'xesam:title')
+
+            echo "<span font_style='italic'>$(fix_amps "$title")</span>  <span font_family='Ionicons' foreground='#6272a4'></span> "
+            sleep $timeout
+            s=$(playerctl status)
+        fi
+
+        if [[ "$s" = "Playing" || "$s" = "Paused" ]]; then
+            artist=$(playerctl metadata 'xesam:artist')
+
+            echo "$(fix_amps "$artist")  <span font_family='Ionicons' foreground='#6272a4'></span> "
+            sleep $timeout
+            s=$(playerctl status)
+        fi
+
+        if [[ "$s" = "Playing" || "$s" = "Paused" ]]; then
+            album=$(playerctl metadata 'xesam:album')
+            albumArtist=$(playerctl metadata 'xesam:albumArtist')
+
+            echo "$(fix_amps "$album") <span foreground='#6272a4'>~</span> $(fix_amps "$albumArtist")  <span font_family='Ionicons' foreground='#6272a4'></span> "
+            sleep $timeout
+        else
+            echo "<span foreground='#6272a4'>-</span> "
+            sleep $timeout
+        fi
+    else
+        echo ' '
+        sleep $timeout
+    fi
+done
+

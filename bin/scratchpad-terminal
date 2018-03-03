@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+new=false
+
+# Is the scratchpad running?
+if ! [[ $(xdotool search --name "scratchpad-terminal") ]]; then
+    termite -c $HOME/.config/termite/config-sc --title "scratchpad-terminal" --class "scratchpad-terminal" &
+    new=true
+fi
+
+xdotool search --sync --name "scratchpad-terminal" windowmove 0 0 windowsize 1920 400
+
+# toggle visibility
+if (! $new ); then
+    wmctrl -F -r "scratchpad-terminal" -b toggle,hidden
+    wmctrl -F -a "scratchpad-terminal"
+fi
+

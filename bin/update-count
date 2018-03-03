@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+count=$(pacaur -Qqu | wc -l)
+
+if [[ $count -eq 0 ]]; then
+    echo "!Y o 0xff22ee22 Y!"
+else
+    echo "$count"
+fi
+

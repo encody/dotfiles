@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+while read line; do
+    if [[
+        # Await focus change events
+        $line == *"node_focus"* &&
+        # scratchpad is open
+        $(xdotool search --onlyvisible --name "scratchpad-terminal") &&
+        # Active window is not the scratchpad
+        $(xdotool getactivewindow getwindowname) != "scratchpad-terminal"
+    ]]; then
+        # toggle the scratchpad
+        $HOME/bin/scratchpad-terminal
+    fi
+done < <(bspc subscribe node)
+

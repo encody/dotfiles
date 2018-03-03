@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+whatami=$($HOME/bin/whatami)
+
+# No battery in a desktop
+if [ "$whatami" != "mobile" ]; then
+    echo ''
+    exit
+fi
+
+lid=$(find /proc/acpi/button/lid -name "LID*")
+
+laststate=$(cat "$lid/state" | awk '{ print $2 }')
+
+while true; do
+    state=$(cat "$lid/state" | awk '{ print $2 }')
+
+    if [ "$laststate" != "$state" ] && [ "$state" = 'closed' ]; then
+        (&>/dev/null $HOME/bin/lock &)
+    fi
+
+    laststate="$state"
+
+    sleep 1
+done
+

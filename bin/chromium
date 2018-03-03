@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if (>/dev/null whatami = 'mobile'); then
+    /usr/bin/chromium-browser --force-device-scale-factor=1.25
+else
+    /usr/bin/chromium-browser
+fi
+

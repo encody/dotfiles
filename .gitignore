@@ -1,0 +1,32 @@
+# Ignore all
+/*/
+/*
+
+# Except:
+
+!.gitignore
+
+!.config/
+.config/*
+!.config/bspwm/
+!.config/compton.conf
+!.config/dunst/
+!.config/fish/
+!.config/nvim/
+!.config/omf/
+!.config/rofi/
+!.config/sxhkd/
+!.config/termite/
+!.config/yabar/
+
+!/bin/
+
+!.bashrc
+!.eslintrc.yml
+!.fonts.conf
+!.tslint.json
+!.wallpaper.png
+!.Xdefaults
+!.Xresources
+!.xinitrc
+

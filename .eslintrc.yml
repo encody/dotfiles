@@ -1,0 +1,32 @@
+---
+    extends: "eslint:recommended"
+    env:
+        browser: true
+        node: true
+        es6: true
+    parserOptions:
+        ecmaVersion: 6
+        sourceType: module
+    rules:
+        comma-dangle:
+            - warn
+            - always-multiline
+        no-undef:
+            - warn
+        no-unused-vars:
+            - warn
+        semi:
+            - error
+            - always
+        no-console:
+            - off
+        indent:
+            - warn
+            - 4
+            - SwitchCase: 1
+        quotes:
+            - warn
+            - single
+        no-empty:
+            - warn
+        

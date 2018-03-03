@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+pamixer --unmute
+pamixer --increase 5
+#$HOME/bin/show-conky volume 3
+

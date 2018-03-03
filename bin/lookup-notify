@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+notify-send --app-name='lookup' "$1" "$($HOME/bin/lookup "$1")"
+

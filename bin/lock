@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if which i3lock-fancy; then
+    i3lock-fancy --pixelate --text "" -- scrot --silent
+else
+    $HOME/pkgs/i3lock-fancy/lock --pixelate --text "" -- scrot --silent
+fi
+

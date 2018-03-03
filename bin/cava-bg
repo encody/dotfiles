@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+termite -c .config/termite/cava-config -e cava --title "cava-bg" --class "cava-bg" --geometry=1920x980+0+100 &
+
+#$HOME/bin/unfocus-cava-bg &
+

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+prefix="<span foreground='#6272a4' font_family='Ionicons'></span>"
+
+echo "$prefix $(xdotool get_desktop)"
+
+while read line; do
+    echo "$prefix $(xdotool get_desktop)"
+done < <(bspc subscribe desktop)
+

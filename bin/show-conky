@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+# conky config name passed as first argument
+name=$1
+
+# timeout passed as second argument
+timeout=${2-5}
+
+# when to close the popup
+closetime=$(date -d "+$timeout seconds")
+
+# lock file name
+lockf=/tmp/conky-$name.lock
+
+# quit if lockfile already exists
+if [ -f $lockf ];
+then
+	# update the file so the dialog stays open additional time
+	echo $closetime > $lockf
+	echo "lockfile $lockf exists, exiting..."
+	exit
+fi
+
+echo "starting conky..."
+
+# start conky
+conky -q -c $HOME/.config/conky/$name &
+
+# conky process id
+pid=$!
+
+echo "started process $pid"
+
+echo "creating lockfile $lockf..."
+
+# write close time to lockfile
+echo $closetime > $lockf
+
+# rm lockfile on termination
+trap "{ rm $lockf ; exit 255; }" SIGINT SIGTERM
+
+# wait
+sleep $timeout
+
+while :
+do
+	# read the close date from a file
+	readdate=$(date -d "$(<$lockf)" +%s)
+
+	# current time
+	now=$(date +%s)
+
+	# if enough time has passed
+	if [ $now -ge $readdate ];
+	then
+		echo "time's up!"
+
+		echo "killing process $pid..."
+		# kill conky
+		kill $pid
+
+		echo "removing lockfile $lockf..."
+		# remove lockfile
+		rm $lockf
+
+		echo "bye!"
+		exit
+	else
+		sleep 1
+	fi
+done
+

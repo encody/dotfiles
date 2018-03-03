@@ -1,0 +1,54 @@
+[global]
+
+font = "Source Sans Pro 14"
+markup = full
+
+format = "<b>%s</b>\n%b\n\n<small>%a</small>"
+sort = yes
+indicate_hidden = yes
+alignment = left
+bounce_freq = 0
+show_age_threshold = 60
+word_wrap = yes
+ignore_newline = no
+geometry = "400x5-40-40"
+stack_duplicates = false
+show_indicators = yes
+transparency = 10
+idle_threshold = 120
+monitor = 0
+follow = mouse
+sticky_history = yes
+line_height = 0
+separator_height = 2
+padding = 18
+horizontal_padding = 28
+separator_color = '#000000'
+startup_notification = false
+frame_width = 0
+
+[shortcuts]
+
+close = ctrl+space
+close_all = ctrl+shift+space
+history = ctrl+grave
+context = ctrl+shift+period
+
+[urgency_low]
+
+background = "#ffffff"
+foreground = "#000000"
+timeout = 5
+
+[urgency_normal]
+
+background = "#ffffff"
+foreground = "#000000"
+timeout = 5
+
+[urgency_critical]
+
+background = "#ffffff"
+foreground = "#000000"
+timeout = 0
+

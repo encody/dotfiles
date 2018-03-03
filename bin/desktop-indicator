@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+while read line; do
+    if [[ $line == *"desktop_focus"* ]]; then
+        $HOME/bin/show-conky desktops 3 &> /dev/null &
+    fi
+done < <(bspc subscribe desktop)
+

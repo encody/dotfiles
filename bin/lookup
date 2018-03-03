@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import sys
+import urllib.request
+import json
+
+def main():
+    try:
+        word = str(sys.argv[1])
+    except IndexError:
+        print('Usage:', sys.argv[0], 'word [max definitions]')
+        return
+
+    try:
+        count = int(sys.argv[2])
+    except IndexError:
+        count = 3
+    except ValueError:
+        print('Error: Max definitions count must be an integer.')
+        return
+
+    response = urllib.request.urlopen('https://glosbe.com/gapi/translate?from=eng&dest=eng&format=json&phrase=' + word).read()
+
+    parsed = json.loads(response)
+
+    meanings = parsed['tuc'][0]['meanings'][:count]
+
+    if len(meanings) == 0:
+        print('Not found.')
+        return
+
+    for i, meaning in enumerate(meanings):
+        print(str(i + 1) + '. ' + meaning['text'])
+
+main()
+

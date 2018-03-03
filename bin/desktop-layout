@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+echo "";
+
+while read line ; do
+    if [[ $line == *"monocle"* ]]; then
+        echo "";
+    elif [[ $line == *"tiled"* ]]; then
+        echo "";
+    fi
+done < <( bspc subscribe desktop )
+

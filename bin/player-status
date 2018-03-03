@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+function symbol {
+    status=$(playerctl status)
+
+    if [ "$status" = "Playing" ]; then
+        echo ""
+    elif [ "$status" = "Paused" ]; then
+        echo ""
+    else
+        echo "-"
+        (>&2 echo 'player status error')
+        playerindex=""
+    fi
+}
+
+function showstatus {
+    symbol
+
+    while read line; do
+        if [[
+            $line = *"sink"*
+        ]]; then
+            if [[ $(playerctl -l 2>/dev/null | wc -l) -gt 0 ]]; then
+                symbol
+                if ! [ "$playerindex" ]; then
+                    break
+                fi
+            else
+                echo "-"
+                (>&2 echo 'player has disappeared')
+            fi
+
+        fi
+    done < <(pactl subscribe)
+}
+
+function findindex {
+    pacmd list-sink-inputs | grep "index" | sed "s/\s*index: \(\d*\)/\1/"
+}
+
+playerindex=$(findindex)
+
+while true; do
+    if ! [ "$playerindex" ]; then
+        echo '-'
+        (>&2 echo 'no player found')
+        playerindex=$(findindex)
+        sleep 2
+    else
+        showstatus
+    fi
+done
+

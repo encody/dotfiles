@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+currentdesktop=$(xdotool get_desktop)
+
+xdotool search --class $1 set_desktop_for_window $currentdesktop windowactivate || ( ($($1) &) && xdotool search --sync --class $1 set_desktop_for_window $currentdesktop windowactivate) &> /dev/null
+

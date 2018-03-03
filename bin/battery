@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+whatami=$($HOME/bin/whatami)
+
+# No battery in a desktop
+if [ "$whatami" = "desktop" ]; then
+    echo ''
+    exit
+fi
+
+battery=$(find /sys/class/power_supply -name "BAT*")
+
+flash=false
+
+while true; do
+    now=$(cat "$battery/energy_now")
+    full=$(cat "$battery/energy_full")
+    stat=$(cat "$battery/status")
+    perc=$(echo "$now / $full * 100" | bc -l)
+
+    stat_disp=' <span font="Ionicons"></span>'
+    if [ "$stat" = 'Charging' ]; then
+        stat_disp=' <span foreground="#00bb00" font="Ionicons"></span>'
+    elif [ "$stat" = 'Discharging' ]; then
+        stat_disp=' <span foreground="#993333" font="Ionicons"></span>'
+    fi
+
+    if [ $(bc <<< "$perc>=99") = "1" ]; then
+        echo "<span foreground=\"#ffffff\"> ^^$stat_disp </span>"
+    elif [ $(bc <<< "$perc<=10") = "1" ]; then
+        if $flash && ! $ischarging; then
+            printf "<span foreground=\"#ffffff\" background=\"#ff0000\"> %02.0f <span font='Ionicons'></span> </span> \n" $perc
+            flash=false
+        else
+            printf "<span foreground=\"#ffffff\"> %02.0f$stat_disp </span> \n" $perc
+            flash=true
+        fi
+    else
+        printf " %02.0f$stat_disp \n" $perc
+    fi
+    sleep 2
+done
+

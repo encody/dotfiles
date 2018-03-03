@@ -1,0 +1,1 @@
+/home/jacob/.local/share/omf/themes/navit/fish_prompt.fish

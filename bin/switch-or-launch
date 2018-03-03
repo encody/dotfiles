@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+xdotool search --class $1 windowactivate || ( ($($1) &) && xdotool search --sync --class $1 windowactivate) &> /dev/null
+

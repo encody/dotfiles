@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+while read line; do
+    if [[
+        # Await focus change events
+        $line == *"node_focus"* &&
+        # Active window is cava
+        $(xdotool getactivewindow getwindowname) == "cava-bg" &&
+        # cava is not the only window in the desktop
+        $(xdotool search --onlyvisible --desktop $(xdotool get_desktop) --class "" | wc -l) -gt 1
+    ]]; then
+        bspc node -f last
+    fi
+done < <(bspc subscribe node)
+

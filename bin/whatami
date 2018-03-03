@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Outputs 'desktop' or 'mobile' based on whether a battery is detected
+
+battery=$(find /sys/class/power_supply -name "BAT*")
+
+if [ "$battery" = "" ]; then
+    echo 'desktop'
+else
+    echo 'mobile'
+fi
+

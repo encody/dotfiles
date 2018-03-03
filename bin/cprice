@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+import sys
+import urllib.request
+import json
+
+def main():
+    try:
+        coinsym = str(sys.argv[1])
+    except IndexError:
+        print('Usage:', sys.argv[0], 'coinsym')
+        return
+
+    response = urllib.request.urlopen('https://min-api.cryptocompare.com/data/price?fsym=' + coinsym.upper() + '&tsyms=USD,BTC').read()
+
+    parsed = json.loads(response)
+
+    for sym in parsed:
+        print(sym + ': ' + str(parsed[sym]))
+
+main()
+

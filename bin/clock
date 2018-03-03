@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+while true; do
+    echo "<span foreground='#6272a4' font_family='Ionicons'></span> $(date +"%a %b %d %H:%M") <span foreground='#6272a4' font_family='Ionicons'></span>"
+    sleep 1
+done
+

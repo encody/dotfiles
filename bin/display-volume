@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+function displayvolume {
+    mute=$(pamixer --get-mute)
+    level=$(pamixer --get-volume)
+
+    postfix="<span foreground='#6272a4' font_family='Ionicons'></span>"
+
+    if [ "$mute" == "true" ]; then
+        echo "-- $postfix"
+    else
+        echo "$level $postfix"
+    fi
+}
+
+displayvolume
+
+while read line; do
+    if [[
+        $line == *"sink"* &&
+        $line == *"change"*
+    ]]; then
+        displayvolume
+    fi
+done < <(pactl subscribe)
+

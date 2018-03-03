@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if command -v termite >/dev/null 2>&1 ; then
+    termite
+else
+    gnome-terminal
+fi
+

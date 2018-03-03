@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+playerheight=70
+screenwidth=$(xdotool getdisplaygeometry | awk '{ print $1 }')
+screenheight=$(xdotool getdisplaygeometry | awk '{ print $2 }')
+
+y=$(( $screenheight - $playerheight ))
+
+$HOME/bin/move-or-launch spotify
+
+eval $(xdotool search --sync --class "spotify" getwindowgeometry --shell)
+
+# If it's the correct size and position, assume music mode is on and disable it, otherwise enable music mode
+(( $X == 0 && $Y == $y && $WIDTH == $screenwidth && $HEIGHT == $playerheight )) && {
+    bspc node -t tiled
+    bspc node -g sticky=off
+    bspc config bottom_padding 0
+} || {
+    bspc node -t floating
+    bspc node -g sticky=on
+    bspc config bottom_padding $playerheight
+    xdotool getactivewindow windowsize 100% $playerheight windowmove 0 $y
+}
+

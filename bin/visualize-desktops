@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# config
+icon_empty='◇'
+icon_full='◈'
+icon_active='◆'
+separator=' '
+
+numberofdesktops=$(xdotool get_num_desktops)
+activedesktop=$(xdotool get_desktop)
+
+desktopisfull () {
+    local desktopid=$1
+    if [[ $(xdotool search --desktop $desktopid --limit 1 --class '') ]]; then
+        echo 1
+    else
+        echo 0
+    fi
+}
+
+d=0
+output=''
+
+while [ $d -lt $numberofdesktops ]; do
+    if [ $d -eq $activedesktop ]; then
+        output=$output$icon_active
+    elif [ $(desktopisfull $d) -eq '1' ]; then
+        output=$output$icon_full
+    else
+        output=$output$icon_empty
+    fi
+
+    let d=d+1
+
+    if [ $d -lt $numberofdesktops ]; then
+        output=$output$separator
+    fi
+done
+
+echo $output
+

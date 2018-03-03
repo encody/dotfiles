@@ -1,0 +1,235 @@
+#
+# wm independent hotkeys
+#
+
+# caps lock shortcut
+# (because the capslock key = Esc, see .config/bspwm/bspwmrc)
+alt + BackSpace
+    xdotool key Caps_Lock
+
+# brightness control
+# brightness up
+XF86MonBrightnessUp
+    brightnessctl s 8%+
+
+# brightness down
+XF86MonBrightnessDown
+    brightnessctl s 8%-
+
+# volume keys
+
+# volume up
+XF86AudioRaiseVolume
+    ~/bin/volup
+
+# volume down
+XF86AudioLowerVolume
+	~/bin/voldown
+
+# volume mute
+XF86AudioMute
+	~/bin/volmute
+
+# volume shortcuts
+
+# volume up
+# alt + PageUp
+alt + Prior
+    ~/bin/volup
+
+# volume down
+# alt + PageDown
+alt + Next
+    ~/bin/voldown
+
+# mute
+# alt + Delete
+alt + Delete
+    ~/bin/volmute
+
+# lock screen
+ctrl + super + q
+	~/bin/lock
+
+# spotify
+ctrl + super + s
+    ~/bin/switch-or-launch spotify
+
+# music mode
+ctrl + super + m
+    ~/bin/music-mode
+
+# dropdown terminal
+ctrl + super + z
+    ~/bin/scratchpad-terminal
+
+# file manager
+ctrl + super + x
+	pcmanfm
+
+# chromium
+ctrl + super + c
+    ~/bin/switch-or-launch chromium
+
+# firefox
+ctrl + super + f
+    ~/bin/switch-or-launch firefox
+
+# vscode
+ctrl + super + v
+    ~/bin/switch-or-launch code
+
+# look up word
+ctrl + alt + w
+    ~/bin/lookup-notify (xsel -o -p)
+
+# media
+
+# skip back
+super + u
+    playerctl previous
+
+# play/pause
+super + i
+    playerctl play-pause
+
+# skip forward
+super + o
+    playerctl next
+
+
+
+# close window
+super + w
+    bspc node -c
+
+# close window
+alt + F4
+    bspc node -c
+
+# window switcher
+super + v
+    rofi -show window
+
+# screenshot
+#
+# whole screen
+Print
+	gscreenshot-cli -f "$HOME/Pictures/screenshot_"(date "+%F_%T")".png"
+
+# selection
+shift + Print
+	gscreenshot-cli -s -f "$HOME/Pictures/screenshot_"(date "+%F_%T")".png"
+
+# gui
+ctrl + Print
+	gscreenshot
+
+# terminal emulator
+super + Return
+	~/bin/normal-terminal
+
+# program launcher
+super + space
+	rofi -show run
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+#
+# bspwm hotkeys
+#
+
+# quit bspwm normally
+ctrl + super + Escape
+	bspc quit
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the next/previous node in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local
+
+# focus the next/previous dekstop in the current monitor
+ctrl + alt + {h,l}
+	bspc desktop -f {prev,next}.local
+
+super + {a,d}
+	bspc desktop -f {prev,next}.local
+
+button{9,8}
+	bspc desktop -f {prev,next}.local
+
+# send node to next/previous desktop and focus the desktop
+ctrl + alt + shift + {h,l}
+    set DIR {prev,next}; \
+	bspc node -d $DIR -f
+
+super + shift + {a,d}
+    set DIR {prev,next}; \
+	bspc node -d $DIR -f
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
