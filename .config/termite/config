@@ -4,18 +4,11 @@ font = Input 16
 
 [colors]
 
-#foreground = #D8DEE9
-#background = #2E3440
+foreground      = #ffffff
 foreground_bold = #D8DEE9
+background      = rgba(26, 28, 35, 0.95)
 cursor = #D8DEE9
 cursor_foreground = #2E3440
-#highlight = #4C566A
-
-# special
-foreground      = #ffffff
-#foreground_bold = #ffffff
-#cursor          = #ffffff
-background      = rgba(26, 28, 35, 0.95)
 scrollback_lines= -1
 
 # black
