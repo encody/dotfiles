@@ -29,6 +29,9 @@ compton -b &
 # fix window reparenting issue for Android Studio, IntelliJ, PyCharm, etc.
 wmname LG3D
 
+# fix libreoffice not tiling
+bspc rule -a Soffice state=tiled
+
 # Desktop background
 feh --bg-fill ~/.wallpaper.png &
 
