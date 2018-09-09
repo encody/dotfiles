@@ -1,6 +1,6 @@
 * {
     background-color:            rgba(0, 0, 0, 0%);
-    background:                  rgba(26, 28, 35, 95%);
+    background:                  rgba(26, 28, 35, 100%);
 
     foreground-color:            rgba(255, 255, 255, 100%);
     normal-color:                rgba(98, 114, 164, 100%);

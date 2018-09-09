@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+
+import sys
+import urllib.request
+import json
+
+def main():
+    try:
+        word = str(sys.argv[1])
+    except IndexError:
+        print('Usage:', sys.argv[0], 'word [max definitions]')
+        return
+
+    try:
+        count = int(sys.argv[2])
+    except IndexError:
+        count = 3
+    except ValueError:
+        print('Error: Max definitions count must be an integer.')
+        return
+
+    response = urllib.request.urlopen('https://jisho.org/api/v1/search/words?keyword=' + word).read()
+
+    parsed = json.loads(response)
+
+    entries = parsed['data'][:count]
+
+    if len(entries) == 0:
+        print('Not found.')
+        return
+
+    for i, entry in enumerate(entries):
+        word = entry['japanese'][0]['word']
+        reading = entry['japanese'][0]['reading']
+
+        if word == None or word == reading:
+            print(str(i + 1) + '. ' + reading + ':')
+        else:
+            print(str(i + 1) + '. ' + word + ' (<i>' + reading + '</i>):')
+
+        for sense in entry['senses']:
+            print('\t• ' + ', '.join(sense['english_definitions'][:5]))
+
+main()
+

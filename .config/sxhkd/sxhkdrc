@@ -36,15 +36,21 @@ XF86AudioMute
 # alt + PageUp
 alt + Prior
     ~/bin/volup
+super + alt + o
+    ~/bin/volup
 
 # volume down
 # alt + PageDown
 alt + Next
     ~/bin/voldown
+super + alt + u
+    ~/bin/voldown
 
 # mute
 # alt + Delete
 alt + Delete
+    ~/bin/volmute
+super + alt + i
     ~/bin/volmute
 
 # lock screen
@@ -65,7 +71,7 @@ ctrl + super + z
 
 # file manager
 ctrl + super + x
-	pcmanfm
+	thunar
 
 # chromium
 ctrl + super + c
@@ -82,6 +88,10 @@ ctrl + super + v
 # look up word
 ctrl + alt + w
     ~/bin/lookup-notify (xsel -o -p)
+
+# look up japanese word
+ctrl + alt + j
+    ~/bin/jisho-notify (xsel -o -p)
 
 # media
 
@@ -232,4 +242,12 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# rotate the root node
+super + {_, shift} + period
+    bspc node @/ -R {90, -90}
+
+# flip the root node
+super + {_, shift} + comma
+    bspc node @/ -F {vertical, horizontal}
 

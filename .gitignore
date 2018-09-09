@@ -12,7 +12,7 @@
 !.config/compton.conf
 !.config/dunst/
 !.config/fish/
-!.config/nvim/
+!.config/nvim/init.vim
 !.config/omf/
 !.config/rofi/
 !.config/sxhkd/

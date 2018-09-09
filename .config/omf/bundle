@@ -1,4 +1,5 @@
 package epwd
 theme clearance
 theme default
+theme git@github.com:encody/navit.git
 theme pure

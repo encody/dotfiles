@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/run/media/jacob/4733A97E4133EADF/Projects/example-hugo-site/content/blog'
 let g:netrw_dirhist_2='/run/media/jacob/4733A97E4133EADF/Projects/geeklaunch.io/dev/sass'
 let g:netrw_dirhist_3='/home/jacob/.config/bspwm'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/run/media/jacob/4733A97E4133EADF/Projects/binghack'
 let g:netrw_dirhist_5='/home/jacob/.config/yabar'
 let g:netrw_dirhist_6='/usr/share/fish/completions'
 let g:netrw_dirhist_7='/home/jacob/.local/share/omf/themes/navit'
+let g:netrw_dirhist_8='/home/jacob/.config/sxhkd'

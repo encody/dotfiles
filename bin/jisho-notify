@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+notify-send --app-name='jisho' "$1" "$($HOME/bin/jisho "$1")"
+

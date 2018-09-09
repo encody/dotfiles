@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-playerheight=70
+playerheight=90
 screenwidth=$(xdotool getdisplaygeometry | awk '{ print $1 }')
 screenheight=$(xdotool getdisplaygeometry | awk '{ print $2 }')
 
