@@ -2,6 +2,7 @@
 
 import sys
 import urllib.request
+import urllib.parse
 import json
 
 def main():
@@ -19,7 +20,7 @@ def main():
         print('Error: Max definitions count must be an integer.')
         return
 
-    response = urllib.request.urlopen('https://jisho.org/api/v1/search/words?keyword=' + word).read()
+    response = urllib.request.urlopen('https://jisho.org/api/v1/search/words?' + urllib.parse.urlencode({'keyword':word})).read()
 
     parsed = json.loads(response)
 
